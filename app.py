@@ -13,7 +13,6 @@ def main():
     st.sidebar.header('행복한 하루되세요🍀')
     choice = st.sidebar.selectbox('📌메뉴', menu)
     st.sidebar.image("https://cafe24img.poxo.com/wigglewiggle20/file_data/wigglewiggle20//2022/07/15/4cde8592a2779a249026379d1c654cd8.jpg", use_column_width=True, caption='Image by Wiggle-Wiggle')
-    # with st.sidebar:
 
     if choice == menu[0] :
         run_app_home()
