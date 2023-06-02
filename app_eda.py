@@ -33,6 +33,7 @@ def run_app_eda():
 
         st.subheader(':loudspeaker:국가 행복지수는 어떤 데이터일까?:thinking_face:')
         if st.checkbox('국가 행복지수 데이터 보기'):
+            st.write('데이터 출처 : kaggle(https://www.kaggle.com/datasets/unsdsn/world-happiness)')
             st.dataframe(df)
             st.write('*국가, 세분화된 대륙, 대륙, 행복지수, GDP, 기대수명, 사회적 지지, 선택의 자유, 아량, 부정부패인식으로 이루어져 있어요*')
 
@@ -43,6 +44,11 @@ def run_app_eda():
                         locationmode = "country names")
         fig4.update_layout(title = "Ladder score")
         st.plotly_chart(fig4)
+        # 익스펜더 해서 넣기
+        st.text('Ladder score : ')
+        st.text('Logged GDP per capita : ')
+        st.text('Social support : ')
+        st.text('Healthy life expectancy : ')
 
         st.subheader(':loudspeaker:국가 행복지수 Top 10 나라:blush:')
         if st.button('클릭:point_left:') :

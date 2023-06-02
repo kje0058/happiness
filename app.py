@@ -1,14 +1,14 @@
 import streamlit as st
 from app_home import run_app_home
 from app_eda import run_app_eda
-from app_chart import run_app_chart
+from app_ml import run_app_ml
 
 def main():
     pass
 
     st.title('😄Happiness 2021😄')
 
-    menu = ['🏠Home, Sweet Home', '📝EDA', '📊DV']
+    menu = ['🏠Home, Sweet Home', '📝EDA', '🤖ML']
 
     st.sidebar.header('행복한 하루되세요🍀')
     choice = st.sidebar.selectbox('📌메뉴', menu)
@@ -20,7 +20,7 @@ def main():
     elif choice == menu[1] :
         run_app_eda()
     else :
-        pass
+        run_app_ml()
 
 if __name__ == '__main__':
     main()
