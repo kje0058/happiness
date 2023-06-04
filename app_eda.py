@@ -11,6 +11,7 @@ if platform.system() == 'Linux':
     rc('font', family='NanumGothic')
 
 def run_app_eda():
+
     tab1, tab2 = st.tabs(["국가 행복지수", "대륙별"])
 
     with tab1:
@@ -35,7 +36,9 @@ def run_app_eda():
         if st.checkbox('국가 행복지수 데이터 보기'):
             st.write('데이터 출처 : kaggle(https://www.kaggle.com/datasets/unsdsn/world-happiness)')
             st.dataframe(df)
-            st.write('*국가, 세분화된 대륙, 대륙, 행복지수, GDP, 기대수명, 사회적 지지, 선택의 자유, 아량, 부정부패인식으로 이루어져 있어요*')
+            st.write('*국가, 세분화된 대륙, 대륙, 행복지수, 1인당 GDP, 사회적 지원, 기대 건강수명, 삶을 선택할 자유, 관대함, 부패에 대한 인식으로 이루어져 있어요*')
+            with st.expander('6가지 행복 평가 항목'):
+                st.text('① 1인당 GDP(GDP per Capita) :  세계은행의 구매력 평가 기준\n② 사회적 지원(Social Support) : 문제가 생겼을 때 도움을 줄 수 있는 사람 여부\n③ 기대 건강수명 (Healthy Life Expectancy) : 세계보건기구의 기대수명 기준\n④ 인생을 선택할 자유(Freedom to make life choices) : 삶에서 무엇을 할 것인지 선택할 자유에 만족하는지 여부\n⑤ 관대함 (Generosity) : 지난 한 달 동안 기부 여부\n⑥ 부패에 대한 인식(Perceptions of Corruption) : 부패가 만연하다고 생각하는지 여부')
 
         st.subheader(':loudspeaker:국가 행복지수 Map:world_map:')
         fig4 = px.choropleth(df.sort_values("Ladder score"), 
@@ -44,11 +47,6 @@ def run_app_eda():
                         locationmode = "country names")
         fig4.update_layout(title = "Ladder score")
         st.plotly_chart(fig4)
-        # 익스펜더 해서 넣기
-        st.text('Ladder score : ')
-        st.text('Logged GDP per capita : ')
-        st.text('Social support : ')
-        st.text('Healthy life expectancy : ')
 
         st.subheader(':loudspeaker:국가 행복지수 Top 10 나라:blush:')
         if st.button('클릭:point_left:') :
@@ -83,43 +81,42 @@ def run_app_eda():
         st.pyplot(fig3)
 
         st.subheader(':loudspeaker:대륙별 행복지수의 지표:bar_chart:')
-        lang_list = ['GDP','기대수명','사회적 지위','선택의 자유', '아량', '부정부패인식']
+        lang_list = ['1인당 GDP','기대 건강수명','사회적 지원','삶을 선택힐 자유', '관대함', '부패에 대한 인식']
 
         choice_list = st.selectbox('칼럼을 선택하세요', lang_list)
 
-        if choice_list=='GDP':
-            st.write('*GDP*')
+        if choice_list=='1인당 GDP':
+            st.write('*1인당 GDP*')
             fig5 = plt.figure()
             sns.barplot(data=df, x='Continent', y='Logged GDP per capita',palette='Spectral')
             st.pyplot(fig5)
             
-        elif choice_list=='기대수명':
-            st.write('*기대수명*')
+        elif choice_list=='기대 건강수명':
+            st.write('*기대 건강수명*')
             fig6 = plt.figure()
             sns.barplot(data=df, x='Continent', y='Healthy life expectancy',palette='Spectral')
             st.pyplot(fig6)
 
-        elif choice_list=='사회적 지위':
-            st.write('*사회적 지위*')
+        elif choice_list=='사회적 지원':
+            st.write('*사회적 지원*')
             fig7 = plt.figure()
             sns.barplot(data=df, x='Continent', y='Social support',palette='Spectral')            
             st.pyplot(fig7)
 
-        elif choice_list=='선택의 자유':
-            st.write('*선택의 자유*')            
+        elif choice_list=='삶을 선택할 자유':
+            st.write('*삶을 선택할 자유*')            
             fig8 = plt.figure()
             sns.barplot(data=df, x='Continent', y='Freedom to make life choices',palette='Spectral')            
             st.pyplot(fig8)
 
-        elif choice_list=='아량':
-            st.write('*아량*')
+        elif choice_list=='관대함':
+            st.write('*관대함*')
             fig9 = plt.figure()
             sns.barplot(data=df, x='Continent', y='Generosity',palette='Spectral')            
             st.pyplot(fig9)
 
-
-        elif choice_list=='부정부패인식':
-            st.write('*부정부패 인식*')
+        elif choice_list=='부패에 대한 인식':
+            st.write('*부패에 대한 인식*')
             fig10 = plt.figure()
             sns.barplot(data=df, x='Continent', y='Perceptions of corruption', palette='Spectral')      
             st.pyplot(fig10)
