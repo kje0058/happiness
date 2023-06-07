@@ -51,8 +51,11 @@ def run_app_eda():
                         locations = "Country name", 
                         color = "Ladder score", color_continuous_scale = 'GnBu',
                         locationmode = "country names")
-        fig4.update_layout(title = "Ladder score")
+        fig4.update_layout(title = "국가 행복지수")
         st.plotly_chart(fig4)
+        with st.expander('Ladder score란?'):
+            st.image('https://www.researchgate.net/publication/41403889/figure/fig2/AS:203177002573832@1425452580488/Quality-of-life-ladder-Notes-Derived-from-Cantrils-self-anchoring-ladder-50-An.png', caption='서울대학교 행복연구센터(https://www.happyfinder.co.kr/2023/04/02/%ed%96%89%eb%b3%b5%ec%9d%98-%ec%b8%a1%ec%a0%95/)')
+            st.text('사다리의 가장 밑인 0은 “자신이 스스로 평가할 때 내 삶은 최악의 상태이다.”입니다. \n가장 위의 10은 “자신이 스스로 평가할 때 내 삶의 최상의 상태이다.”입니다. \n이 척도에서 자신의 인생을 한번 평가하는 방법으로 삶의 만족도를 측정합니다.')
 
         st.subheader(':loudspeaker:국가 행복지수 Top 10 나라:blush:')
         if st.button('클릭:point_left:') :
