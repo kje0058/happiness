@@ -6,9 +6,6 @@ import seaborn as sns
 import plotly.express as px
 
 def run_app_ml():
-   tab1, tab2 = st.tabs(["행복지수와 상관관계", "지표별 상관관계"])
-
-   with tab1:
       df=pd.read_csv('data/world-happiness-report-2021.csv')
       df.drop(['Standard error of ladder score','upperwhisker', 'lowerwhisker',
          'Ladder score in Dystopia',
@@ -25,79 +22,31 @@ def run_app_ml():
       df=df.reindex(['Country name','Regional indicator', 'Continent', 'Ladder score',
                      'Logged GDP per capita', 'Social support', 'Healthy life expectancy',
                      'Freedom to make life choices', 'Generosity','Perceptions of corruption'],axis = 1)
+
       df_corr = df.corr(numeric_only=True)
       mask = np.array(df_corr)
       mask[np.tril_indices_from(mask)] = False
 
       st.subheader(':loudspeaker:국가 행복지수는 어떤 평가 항목과 관련이 있나요?:thinking_face:')
-      bu_1=st.button('히트맵 보기')   
-      if bu_1:
-         fig6=plt.figure()
-         sns.heatmap(df.corr(numeric_only=True), mask=mask, fmt='.2f', annot=True, vmin=-1, vmax=1, cmap='coolwarm', linewidths=0.5)
-         st.pyplot(fig6)
+      ck_1=st.checkbox('히트맵 보기', value=True)   
+      if ck_1:
+            fig6=plt.figure()
+            sns.heatmap(df.corr(numeric_only=True), mask=mask, fmt='.2f', annot=True, vmin=-1, vmax=1, cmap='coolwarm', linewidths=0.5)
+            st.pyplot(fig6)
 
-      st.subheader(':loudspeaker:행복지수와 상관관계?:thinking_face:')
-      lang_list = ['1인당 GDP','기대 건강수명','사회적 지원','삶을 선택할 자유', '관대함', '부패에 대한 인식']
+            st.subheader(':loudspeaker:행복지수와 상관관계?:thinking_face:')
+            lang_list = ['1인당 GDP','기대 건강수명','사회적 지원','삶을 선택할 자유', '관대함', '부패에 대한 인식']
 
-      choice_list = st.selectbox('평가항목을 선택하세요', lang_list)
+            choice_list = st.selectbox('평가항목을 선택하세요', lang_list)
 
       if choice_list=='1인당 GDP':
-            st.write('*1인당 GDP*')
             fig11 = plt.figure()
             sns.regplot(x='Logged GDP per capita',y='Ladder score',data=df)
             plt.xlabel('1인당 GDP')
             plt.ylabel('국가 행복지수')
+            plt.title('국가 행복지수와 1인당 GDP')
             st.pyplot(fig11)
-            
-      elif choice_list=='기대 건강수명':
-            st.write('*기대 건강수명*')
-            fig12 = plt.figure()
-            sns.regplot(x='Healthy life expectancy',y='Ladder score', data=df)
-            plt.xlabel('기대 건강수명')
-            plt.ylabel('국가 행복지수')
-            st.pyplot(fig12)
-
-      elif choice_list=='사회적 지원':
-            st.write('*사회적 지원*')
-            fig13 = plt.figure()
-            sns.regplot(x='Social support',y='Ladder score', data=df)
-            plt.xlabel('사회적 지원')
-            plt.ylabel('국가 행복지수')          
-            st.pyplot(fig13)
-
-      elif choice_list=='삶을 선택할 자유':
-            st.write('*삶을 선택할 자유*')            
-            fig14 = plt.figure()
-            sns.regplot(x='Freedom to make life choices',y='Ladder score', data=df)
-            plt.xlabel('삶을 선택할 자유')
-            plt.ylabel('국가 행복지수')           
-            st.pyplot(fig14)
-
-      elif choice_list=='관대함':
-            st.write('*관대함*')
-            fig15 = plt.figure()
-            sns.regplot(x='Generosity',y='Ladder score', data=df)
-            plt.xlabel('관대함')
-            plt.ylabel('국가 행복지수')             
-            st.pyplot(fig15)
-
-      elif choice_list=='부패에 대한 인식':
-            st.write('*부패에 대한 인식*')
-            fig16 = plt.figure()
-            sns.regplot(x='Perceptions of corruption',y='Ladder score', data=df)
-            plt.xlabel('부패에 대한 인식')
-            plt.ylabel('국가 행복지수')       
-            st.pyplot(fig16)
-
-
-   with tab2:
-      st.subheader(':loudspeaker:지표들간의 상관관계?:thinking_face:')
-      lang_list = ['1인당 GDP','기대 건강수명','사회적 지원','삶을 선택할 자유', '관대함', '부패에 대한 인식']
-
-      choice_list = st.selectbox('지표를 선택하세요', lang_list)
-
-      if choice_list=='1인당 GDP':
-            st.write('*1인당 GDP*')
+            st.write('*1인당 GDP와 다른 지표들 비교*')
             fig17,axes=plt.subplots(nrows=2,ncols=3)
             fig17.set_size_inches(12,8)
             sns.regplot(x='Social support',y='Logged GDP per capita',data=df,ax=axes[0][0])
@@ -108,7 +57,13 @@ def run_app_ml():
             st.pyplot(fig17)
             
       elif choice_list=='기대 건강수명':
-            st.write('*기대 건강수명*')
+            fig12 = plt.figure()
+            sns.regplot(x='Healthy life expectancy',y='Ladder score', data=df)
+            plt.xlabel('기대 건강수명')
+            plt.ylabel('국가 행복지수')
+            plt.title('국가 행복지수와 기대 건강수명')
+            st.pyplot(fig12)
+            st.write('*기대 건강수명과 다른 지표들 비교*')
             fig19,axes=plt.subplots(nrows=2,ncols=3)
             fig19.set_size_inches(12,8)
             sns.regplot(x='Logged GDP per capita',y='Healthy life expectancy',data=df,ax=axes[0][0])
@@ -118,9 +73,14 @@ def run_app_ml():
             sns.regplot(x='Perceptions of corruption',y='Healthy life expectancy',data=df, ax=axes[1][1])
             st.pyplot(fig19)
 
-
       elif choice_list=='사회적 지원':
-            st.write('*사회적 지원*')
+            fig13 = plt.figure()
+            sns.regplot(x='Social support',y='Ladder score', data=df)
+            plt.xlabel('사회적 지원')
+            plt.ylabel('국가 행복지수')   
+            plt.title('국가 행복지수와 사회적 지원')    
+            st.pyplot(fig13)
+            st.write('*사회적 지원과 다른 지표들 비교*')
             fig18,axes=plt.subplots(nrows=2,ncols=3)
             fig18.set_size_inches(12,8)
             sns.regplot(x='Logged GDP per capita',y='Social support',data=df,ax=axes[0][0])
@@ -130,8 +90,14 @@ def run_app_ml():
             sns.regplot(x='Perceptions of corruption',y='Social support',data=df, ax=axes[1][1])
             st.pyplot(fig18)
 
-      elif choice_list=='삶을 선택할 자유':
-            st.write('*삶을 선택할 자유*')            
+      elif choice_list=='삶을 선택할 자유':          
+            fig14 = plt.figure()
+            sns.regplot(x='Freedom to make life choices',y='Ladder score', data=df)
+            plt.xlabel('삶을 선택할 자유')
+            plt.ylabel('국가 행복지수')
+            plt.title('국가 행복지수와 삶을 선택할 자유')            
+            st.pyplot(fig14)
+            st.write('*삶을 선택할 자유와 다른 지표들 비교*')            
             fig20,axes=plt.subplots(nrows=2,ncols=3)
             fig20.set_size_inches(12,8)
             sns.regplot(x='Logged GDP per capita',y='Freedom to make life choices',data=df,ax=axes[0][0])
@@ -142,7 +108,13 @@ def run_app_ml():
             st.pyplot(fig20)
 
       elif choice_list=='관대함':
-            st.write('*관대함*')
+            fig15 = plt.figure()
+            sns.regplot(x='Generosity',y='Ladder score', data=df)
+            plt.xlabel('관대함')
+            plt.ylabel('국가 행복지수')
+            plt.title('국가 행복지수와 관대함')                  
+            st.pyplot(fig15)
+            st.write('*관대함과 다른 지표들 비교*')
             fig21,axes=plt.subplots(nrows=2,ncols=3)
             fig21.set_size_inches(12,8)
             sns.regplot(x='Logged GDP per capita',y='Generosity',data=df,ax=axes[0][0])
@@ -152,13 +124,20 @@ def run_app_ml():
             sns.regplot(x='Perceptions of corruption',y='Generosity',data=df, ax=axes[1][1])
             st.pyplot(fig21)
 
+
       elif choice_list=='부패에 대한 인식':
-            st.write('*부패에 대한 인식*')
+            fig16 = plt.figure()
+            sns.regplot(x='Perceptions of corruption',y='Ladder score', data=df)
+            plt.xlabel('부패에 대한 인식')
+            plt.ylabel('국가 행복지수')
+            plt.title('국가 행복지수와 부패에 대한 인식')        
+            st.pyplot(fig16)
+            st.write('*부패에 대한 인식과 다른 지표들 비교*')
             fig22,axes=plt.subplots(nrows=2,ncols=3)
             fig22.set_size_inches(12,8)
             sns.regplot(x='Logged GDP per capita',y='Perceptions of corruption',data=df,ax=axes[0][0])
             sns.regplot(x='Healthy life expectancy',y='Perceptions of corruption',data=df, ax=axes[0][1])
             sns.regplot(x='Social support',y='Perceptions of corruption', data=df,ax=axes[0][2])
             sns.regplot(x='Freedom to make life choices',y='Perceptions of corruption',data=df,ax=axes[1][0])
-            sns.regplot(x='Generosity',y='Perceptions of corruption',data=df, ax=axes[1][1])
+            sns.regplot(x='Generosity',y='Perceptions of corruption',data=df, ax=axes[1][1])  
             st.pyplot(fig22)

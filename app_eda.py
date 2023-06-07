@@ -15,6 +15,7 @@ def run_app_eda():
     tab1, tab2 = st.tabs(["국가 행복지수", "대륙별"])
 
     with tab1:
+        df1=pd.read_csv('data/world-happiness-report-2021.csv')
         df=pd.read_csv('data/world-happiness-report-2021.csv')
         df.drop(['Standard error of ladder score','upperwhisker', 'lowerwhisker',
         'Ladder score in Dystopia',
@@ -33,8 +34,13 @@ def run_app_eda():
                         'Freedom to make life choices', 'Generosity','Perceptions of corruption'],axis = 1)
 
         st.subheader(':loudspeaker:국가 행복지수는 어떤 데이터일까?:thinking_face:')
-        if st.checkbox('국가 행복지수 데이터 보기'):
+        ck_1=st.checkbox('데이터 원본 보기')
+        if ck_1 :
             st.write('데이터 출처 : kaggle(https://www.kaggle.com/datasets/unsdsn/world-happiness)')
+            st.dataframe(df1)
+        ck_2 = st.checkbox('국가 행복지수 데이터 보기',value=True)
+        if ck_2 :
+
             st.dataframe(df)
             st.write('*국가, 세분화된 대륙, 대륙, 행복지수, 1인당 GDP, 사회적 지원, 기대 건강수명, 삶을 선택할 자유, 관대함, 부패에 대한 인식으로 이루어져 있어요*')
             with st.expander('6가지 행복 평가 항목'):
@@ -81,7 +87,7 @@ def run_app_eda():
         st.pyplot(fig3)
 
         st.subheader(':loudspeaker:대륙별 행복지수의 지표:bar_chart:')
-        lang_list = ['1인당 GDP','기대 건강수명','사회적 지원','삶을 선택힐 자유', '관대함', '부패에 대한 인식']
+        lang_list = ['1인당 GDP','기대 건강수명','사회적 지원','삶을 선택할 자유', '관대함', '부패에 대한 인식']
 
         choice_list = st.selectbox('칼럼을 선택하세요', lang_list)
 

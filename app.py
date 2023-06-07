@@ -4,7 +4,6 @@ from app_eda import run_app_eda
 from app_ml import run_app_ml
 
 def main():
-    pass
 
     st.title('😄Happiness 2021😄')
 
