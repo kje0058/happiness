@@ -81,7 +81,6 @@ def run_app_ml():
             plt.ylabel('국가 행복지수')
             plt.title('국가 행복지수와 관대함')                  
             st.pyplot(fig15)
-            st.write('*관대함과 다른 지표들 비교*')
 
 
       elif choice_list=='부패에 대한 인식':
