@@ -34,10 +34,10 @@ def run_app_ml():
             sns.heatmap(df.corr(numeric_only=True), mask=mask, fmt='.2f', annot=True, vmin=-1, vmax=1, cmap='coolwarm', linewidths=0.5)
             st.pyplot(fig6)
 
-            st.subheader(':loudspeaker:행복지수와 상관관계?:thinking_face:')
-            lang_list = ['1인당 GDP','기대 건강수명','사회적 지원','삶을 선택할 자유', '관대함', '부패에 대한 인식']
+      st.subheader(':loudspeaker:행복지수와 상관관계?:thinking_face:')
+      lang_list = ['1인당 GDP','기대 건강수명','사회적 지원','삶을 선택할 자유', '관대함', '부패에 대한 인식']
 
-            choice_list = st.selectbox('평가항목을 선택하세요', lang_list)
+      choice_list = st.selectbox('평가항목을 선택하세요', lang_list)
 
       if choice_list=='1인당 GDP':
             fig11 = plt.figure()
