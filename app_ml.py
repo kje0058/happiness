@@ -46,15 +46,7 @@ def run_app_ml():
             plt.ylabel('국가 행복지수')
             plt.title('국가 행복지수와 1인당 GDP')
             st.pyplot(fig11)
-            st.write('*1인당 GDP와 다른 지표들 비교*')
-            fig17,axes=plt.subplots(nrows=2,ncols=3)
-            fig17.set_size_inches(12,8)
-            sns.regplot(x='Social support',y='Logged GDP per capita',data=df,ax=axes[0][0])
-            sns.regplot(x='Healthy life expectancy',y='Logged GDP per capita',data=df, ax=axes[0][1])
-            sns.regplot(x='Freedom to make life choices',y='Logged GDP per capita', data=df,ax=axes[0][2])
-            sns.regplot(x='Generosity',y='Logged GDP per capita',data=df,ax=axes[1][0])
-            sns.regplot(x='Perceptions of corruption',y='Logged GDP per capita',data=df, ax=axes[1][1])
-            st.pyplot(fig17)
+
             
       elif choice_list=='기대 건강수명':
             fig12 = plt.figure()
@@ -63,15 +55,6 @@ def run_app_ml():
             plt.ylabel('국가 행복지수')
             plt.title('국가 행복지수와 기대 건강수명')
             st.pyplot(fig12)
-            st.write('*기대 건강수명과 다른 지표들 비교*')
-            fig19,axes=plt.subplots(nrows=2,ncols=3)
-            fig19.set_size_inches(12,8)
-            sns.regplot(x='Logged GDP per capita',y='Healthy life expectancy',data=df,ax=axes[0][0])
-            sns.regplot(x='Social support',y='Healthy life expectancy',data=df, ax=axes[0][1])
-            sns.regplot(x='Freedom to make life choices',y='Healthy life expectancy', data=df,ax=axes[0][2])
-            sns.regplot(x='Generosity',y='Healthy life expectancy',data=df,ax=axes[1][0])
-            sns.regplot(x='Perceptions of corruption',y='Healthy life expectancy',data=df, ax=axes[1][1])
-            st.pyplot(fig19)
 
       elif choice_list=='사회적 지원':
             fig13 = plt.figure()
@@ -80,15 +63,7 @@ def run_app_ml():
             plt.ylabel('국가 행복지수')   
             plt.title('국가 행복지수와 사회적 지원')    
             st.pyplot(fig13)
-            st.write('*사회적 지원과 다른 지표들 비교*')
-            fig18,axes=plt.subplots(nrows=2,ncols=3)
-            fig18.set_size_inches(12,8)
-            sns.regplot(x='Logged GDP per capita',y='Social support',data=df,ax=axes[0][0])
-            sns.regplot(x='Healthy life expectancy',y='Social support',data=df, ax=axes[0][1])
-            sns.regplot(x='Freedom to make life choices',y='Social support', data=df,ax=axes[0][2])
-            sns.regplot(x='Generosity',y='Social support',data=df,ax=axes[1][0])
-            sns.regplot(x='Perceptions of corruption',y='Social support',data=df, ax=axes[1][1])
-            st.pyplot(fig18)
+
 
       elif choice_list=='삶을 선택할 자유':          
             fig14 = plt.figure()
@@ -97,15 +72,7 @@ def run_app_ml():
             plt.ylabel('국가 행복지수')
             plt.title('국가 행복지수와 삶을 선택할 자유')            
             st.pyplot(fig14)
-            st.write('*삶을 선택할 자유와 다른 지표들 비교*')            
-            fig20,axes=plt.subplots(nrows=2,ncols=3)
-            fig20.set_size_inches(12,8)
-            sns.regplot(x='Logged GDP per capita',y='Freedom to make life choices',data=df,ax=axes[0][0])
-            sns.regplot(x='Healthy life expectancy',y='Freedom to make life choices',data=df, ax=axes[0][1])
-            sns.regplot(x='Social support',y='Freedom to make life choices', data=df,ax=axes[0][2])
-            sns.regplot(x='Generosity',y='Freedom to make life choices',data=df,ax=axes[1][0])
-            sns.regplot(x='Perceptions of corruption',y='Freedom to make life choices',data=df, ax=axes[1][1])
-            st.pyplot(fig20)
+
 
       elif choice_list=='관대함':
             fig15 = plt.figure()
@@ -115,14 +82,6 @@ def run_app_ml():
             plt.title('국가 행복지수와 관대함')                  
             st.pyplot(fig15)
             st.write('*관대함과 다른 지표들 비교*')
-            fig21,axes=plt.subplots(nrows=2,ncols=3)
-            fig21.set_size_inches(12,8)
-            sns.regplot(x='Logged GDP per capita',y='Generosity',data=df,ax=axes[0][0])
-            sns.regplot(x='Healthy life expectancy',y='Generosity',data=df, ax=axes[0][1])
-            sns.regplot(x='Social support',y='Generosity', data=df,ax=axes[0][2])
-            sns.regplot(x='Freedom to make life choices',y='Generosity',data=df,ax=axes[1][0])
-            sns.regplot(x='Perceptions of corruption',y='Generosity',data=df, ax=axes[1][1])
-            st.pyplot(fig21)
 
 
       elif choice_list=='부패에 대한 인식':
@@ -132,12 +91,3 @@ def run_app_ml():
             plt.ylabel('국가 행복지수')
             plt.title('국가 행복지수와 부패에 대한 인식')        
             st.pyplot(fig16)
-            st.write('*부패에 대한 인식과 다른 지표들 비교*')
-            fig22,axes=plt.subplots(nrows=2,ncols=3)
-            fig22.set_size_inches(12,8)
-            sns.regplot(x='Logged GDP per capita',y='Perceptions of corruption',data=df,ax=axes[0][0])
-            sns.regplot(x='Healthy life expectancy',y='Perceptions of corruption',data=df, ax=axes[0][1])
-            sns.regplot(x='Social support',y='Perceptions of corruption', data=df,ax=axes[0][2])
-            sns.regplot(x='Freedom to make life choices',y='Perceptions of corruption',data=df,ax=axes[1][0])
-            sns.regplot(x='Generosity',y='Perceptions of corruption',data=df, ax=axes[1][1])  
-            st.pyplot(fig22)
